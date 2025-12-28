@@ -1,0 +1,892 @@
+/* 购物车页面专用样式 */
+
+/* 购物车标题区域 */
+.cart-header {
+    background-color: white;
+    padding: 20px 0;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 20px;
+}
+
+.cart-header h1 {
+    color: #e4393c;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.cart-steps {
+    display: flex;
+    justify-content: center;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.step {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    color: #999;
+}
+
+.step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 15px;
+    right: -50%;
+    width: 100%;
+    height: 2px;
+    background-color: #eee;
+    z-index: 1;
+}
+
+.step.active:not(:last-child)::after {
+    background-color: #e4393c;
+}
+
+.step span:first-child {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 8px;
+    font-weight: bold;
+    z-index: 2;
+    position: relative;
+}
+
+.step.active span:first-child {
+    background-color: #e4393c;
+    color: white;
+}
+
+.step.active {
+    color: #e4393c;
+    font-weight: bold;
+}
+
+/* 购物车主布局 */
+.cart-main-layout {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* 左侧商品列表 */
+.cart-items-section {
+    flex: 2;
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+/* 可滚动的购物车商品区域 */
+.cart-items-scroll {
+    flex: 1;
+    overflow-y: auto;
+    max-height: 500px;
+    margin: 15px 0;
+    border: 1px solid #f0f0f0;
+    border-radius: 4px;
+}
+
+.cart-items-list {
+    min-height: 100px;
+}
+
+/* 空购物车提示 */
+.empty-cart-message {
+    text-align: center;
+    padding: 60px 20px;
+    color: #999;
+    display: none;
+}
+
+.empty-cart-message i {
+    color: #ddd;
+    margin-bottom: 20px;
+    font-size: 48px;
+}
+
+.empty-cart-message h3 {
+    margin-bottom: 10px;
+    font-size: 24px;
+}
+
+.empty-cart-message p {
+    margin-bottom: 30px;
+    font-size: 16px;
+}
+
+/* 购物车表格样式优化 - 修复纵向和横向对齐 */
+.cart-table-header {
+    background-color: #f7f7f7;
+    border-radius: 4px;
+    padding: 15px 20px;
+    margin-bottom: 0;
+}
+
+.cart-table-row {
+    display: flex;
+    align-items: center;
+    height: 40px;
+}
+
+/* 表头列 - 严格定义宽度 */
+.cart-table-col {
+    padding: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.product-col {
+    width: 45%; /* 商品信息占45%宽度 */
+    justify-content: flex-start;
+    padding-left: 100px; /* 图片宽度+边距 */
+    text-align: left;
+}
+
+.price-col {
+    width: 15%; /* 单价列 */
+    justify-content: center;
+    text-align: center;
+}
+
+.quantity-col {
+    width: 15%; /* 数量列 */
+    justify-content: center;
+    text-align: center;
+}
+
+.total-col {
+    width: 15%; /* 小计列 */
+    justify-content: center;
+    text-align: center;
+}
+
+.action-col {
+    width: 10%; /* 操作列 */
+    justify-content: center;
+    text-align: center;
+}
+
+.col-label {
+    font-size: 14px;
+    color: #333;
+    font-weight: bold;
+    line-height: 1;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.product-col .col-label {
+    justify-content: flex-start;
+}
+
+.price-col .col-label,
+.quantity-col .col-label,
+.total-col .col-label,
+.action-col .col-label {
+    justify-content: center;
+}
+
+/* 购物车商品项样式优化 - 修复纵向对齐 */
+.cart-item-card {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid #eee;
+    min-height: 100px;
+    box-sizing: border-box;
+}
+
+/* 修复：确保所有列的容器高度一致且垂直居中 */
+.cart-item-image {
+    width: 80px;
+    height: 80px;
+    margin-right: 20px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cart-item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+/* 商品信息区域 - 修复：确保垂直居中并与表头对齐 */
+.cart-item-info {
+    width: calc(45% - 100px); /* 与表头product-col宽度匹配，减去图片区域 */
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    height: 80px;
+    justify-content: flex-start;
+    text-align: left;
+    box-sizing: border-box;
+    padding-left: 0;
+}
+
+.cart-item-title {
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 1.4;
+    color: #333;
+    /* 商品名称超过7个字显示省略号 */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    display: block;
+    margin: 0;
+    cursor: pointer;
+    position: relative;
+}
+
+/* 鼠标悬停时显示完整商品名称的工具提示 */
+.cart-item-title:hover::after {
+    content: attr(title);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    z-index: 100;
+    pointer-events: none;
+}
+
+/* 价格列 - 修复：确保垂直居中和水平居中 */
+.cart-item-price {
+    width: 15%;
+    justify-content: center;
+    font-size: 14px;
+    color: #e4393c;
+    font-weight: bold;
+    text-align: center;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+/* 数量列 - 修复：确保垂直居中 */
+.cart-item-quantity {
+    width: 15%;
+    justify-content: center;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+.quantity-control {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+    height: 30px;
+}
+
+.quantity-btn {
+    width: 28px;
+    height: 30px;
+    background-color: #f5f5f5;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    transition: background-color 0.3s;
+}
+
+.quantity-btn:hover {
+    background-color: #e8e8e8;
+}
+
+.quantity-btn:active {
+    background-color: #ddd;
+}
+
+.quantity-input {
+    width: 36px;
+    height: 30px;
+    border: none;
+    text-align: center;
+    font-size: 12px;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    padding: 0;
+    -moz-appearance: textfield;
+}
+
+.quantity-input::-webkit-outer-spin-button,
+.quantity-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* 小计列 - 修复：确保垂直居中 */
+.cart-item-total {
+    width: 15%;
+    justify-content: center;
+    font-size: 14px;
+    color: #e4393c;
+    font-weight: bold;
+    text-align: center;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+/* 操作列 - 修复：确保垂直居中 */
+.cart-item-remove {
+    width: 10%;
+    justify-content: center;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+.remove-btn {
+    background: none;
+    border: none;
+    color: #999;
+    cursor: pointer;
+    font-size: 16px;
+    transition: color 0.3s;
+    padding: 5px;
+}
+
+.remove-btn:hover {
+    color: #e4393c;
+}
+
+/* 购物车操作按钮 */
+.cart-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.btn-secondary, .btn-danger, .btn-primary {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+}
+
+.btn-secondary {
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+.btn-secondary:hover {
+    background-color: #e8e8e8;
+}
+
+.btn-danger {
+    background-color: #f9f0f0;
+    color: #e4393c;
+}
+
+.btn-danger:hover {
+    background-color: #f5e0e0;
+}
+
+.btn-primary {
+    background-color: #e4393c;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #c20c0e;
+}
+
+/* 右侧结算栏 */
+.cart-summary-section {
+    flex: 1;
+    position: sticky;
+    top: 20px;
+    max-width: 350px;
+}
+
+.summary-card {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.summary-header {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.summary-header h3 {
+    color: #e4393c;
+    margin: 0;
+}
+
+.summary-content {
+    padding-top: 10px;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+.total-row {
+    font-size: 20px;
+    font-weight: bold;
+    color: #e4393c;
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 25px;
+}
+
+.checkout-btn {
+    width: 100%;
+    padding: 15px;
+    background-color: #e4393c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.checkout-btn:hover {
+    background-color: #c20c0e;
+}
+
+.checkout-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* 付款模态框优化 */
+.payment-modal {
+    width: 500px;
+    height: 375px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+}
+
+.payment-modal .modal-header {
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+    background-color: #f9f9f9;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.payment-modal .modal-header h3 {
+    margin: 0;
+    color: #e4393c;
+    font-size: 20px;
+}
+
+.payment-modal .modal-header .close-modal {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #999;
+}
+
+.payment-modal .modal-body {
+    flex: 1;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding-bottom: 80px;
+}
+
+/* 支付方式区域 */
+.payment-method {
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.payment-method h4 {
+    margin-bottom: 15px;
+    font-size: 16px;
+    color: #333;
+    font-weight: 600;
+    text-align: left;
+}
+
+.payment-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.payment-option {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s;
+    width: 100%;
+    max-width: 280px;
+}
+
+.payment-option.active {
+    border-color: #e4393c;
+    background-color: #f9f0f0;
+}
+
+.payment-option input {
+    margin-right: 10px;
+}
+
+.payment-option i {
+    font-size: 20px;
+    margin-right: 10px;
+    color: #333;
+    width: 24px;
+}
+
+.payment-option:nth-child(1) i {
+    color: #09bb07;
+}
+
+.payment-option:nth-child(2) i {
+    color: #1677ff;
+}
+
+.payment-option:nth-child(3) i {
+    color: #f0ad4e;
+}
+
+.payment-option span {
+    font-size: 14px;
+    color: #333;
+}
+
+/* 付款金额区域 */
+.payment-amount-container {
+    position: absolute;
+    right: 25px;
+    bottom: 110px;
+    text-align: right;
+}
+
+.payment-amount {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 5px;
+}
+
+.payment-amount-label {
+    font-size: 14px;
+    color: #666;
+}
+
+.payment-amount-value {
+    font-size: 24px;
+    color: #e4393c;
+    font-weight: bold;
+}
+
+/* 模态框底部按钮区域 */
+.payment-modal .modal-footer {
+    padding: 15px 25px;
+    border-top: 1px solid #eee;
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    background-color: #f9f9f9;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.payment-modal .modal-footer button {
+    min-width: 100px;
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+/* 取消按钮样式 */
+.payment-modal .modal-footer .btn-secondary {
+    background-color: #f5f5f5;
+    color: #333;
+    border: 1px solid #ddd;
+}
+
+.payment-modal .modal-footer .btn-secondary:hover {
+    background-color: #e8e8e8;
+}
+
+/* 确认付款按钮样式 */
+.payment-modal .modal-footer .btn-primary {
+    background-color: #e4393c;
+    color: white;
+}
+
+.payment-modal .modal-footer .btn-primary:hover {
+    background-color: #c20c0e;
+}
+
+/* 成功模态框 */
+.success-modal {
+    max-width: 400px;
+    text-align: center;
+    padding: 40px 30px;
+}
+
+.success-icon {
+    font-size: 60px;
+    color: #52c41a;
+    margin-bottom: 20px;
+}
+
+.success-modal h3 {
+    margin-bottom: 15px;
+    color: #333;
+    font-size: 24px;
+}
+
+.success-modal p {
+    margin-bottom: 10px;
+    color: #666;
+    font-size: 16px;
+}
+
+.success-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+/* 清空购物车确认模态框 */
+.confirm-modal {
+    max-width: 400px;
+    text-align: center;
+    padding: 0;
+}
+
+.confirm-modal .modal-header {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.confirm-modal .modal-header h3 {
+    margin: 0;
+    color: #e4393c;
+    font-size: 20px;
+    padding: 20px 20px 0 20px;
+}
+
+.confirm-icon {
+    font-size: 60px;
+    color: #f0ad4e;
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+
+.confirm-modal .modal-body {
+    padding: 20px;
+}
+
+.confirm-modal p {
+    margin-bottom: 10px;
+    color: #333;
+    font-size: 16px;
+}
+
+.confirm-warning {
+    color: #e4393c;
+    font-weight: bold;
+    font-size: 14px;
+    margin-top: 15px;
+}
+
+.confirm-modal .modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 20px;
+    border-top: 1px solid #eee;
+}
+
+/* 响应式设计 */
+@media (max-width: 1024px) {
+    .cart-main-layout {
+        flex-direction: column;
+    }
+    
+    .cart-summary-section {
+        max-width: 100%;
+        width: 100%;
+        position: static;
+    }
+    
+    .cart-table-col {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 768px) {
+    .cart-table-header {
+        display: none;
+    }
+    
+    .cart-item-card {
+        flex-direction: column;
+        align-items: flex-start;
+        position: relative;
+        padding: 15px;
+    }
+    
+    .cart-item-image {
+        width: 60px;
+        height: 60px;
+        margin-right: 15px;
+        margin-bottom: 0;
+    }
+    
+    .cart-item-info {
+        width: 100%;
+        margin-bottom: 15px;
+        height: auto;
+    }
+    
+    .cart-item-price, .cart-item-quantity, .cart-item-total {
+        width: 100%;
+        text-align: left;
+        margin-bottom: 10px;
+        height: auto;
+        justify-content: flex-start;
+    }
+    
+    .cart-item-remove {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        width: auto;
+        height: auto;
+    }
+    
+    .cart-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .btn-secondary, .btn-danger {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .payment-modal {
+        width: 90%;
+        height: auto;
+        min-height: 400px;
+    }
+    
+    .payment-options {
+        max-width: 100%;
+    }
+    
+    .payment-amount-container {
+        position: static;
+        margin-top: 20px;
+        text-align: center;
+        order: 2;
+    }
+    
+    .payment-amount {
+        align-items: center;
+    }
+    
+    .payment-modal .modal-footer {
+        position: static;
+        order: 3;
+        flex-direction: column;
+    }
+    
+    .payment-modal .modal-footer button {
+        width: 100%;
+    }
+}
+
+/* 确保商品名称最多显示7个中文字符（约14个英文字符） */
+.cart-item-title {
+    max-width: 120px; /* 大约可以显示7个中文字符 */
+}
+
+@media (max-width: 768px) {
+    .cart-item-title {
+        max-width: 200px;
+    }
+}
